@@ -1,30 +1,57 @@
 package com.prog3team.racerx;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.prog3team.racerx.screens.LoadingScreen;
+import com.prog3team.racerx.screens.MenuScreen;
 
-public class Application extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+public class Application extends Game {
+	public final int VIRTUAL_WIDTH = 800;
+	public final int VIRTUAL_HEIGHT = 800;
+	//General
+	public OrthographicCamera camera;
+	public Viewport viewport;
+	public  SpriteBatch batch;
+	public AssetManager assets;
+	//Screens
+	public MenuScreen menuScreen;
+	public LoadingScreen loadingScreen;
+	
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-		System.out.println("test");
-		System.out.println("another test!!");
-		
+		camera = new OrthographicCamera();
+		viewport = new StretchViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, camera);
+		viewport.apply();
+		camera.position.set(VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2, 0);
+		camera.update();
+		assets = new AssetManager();
+		//Init Screens
+		loadingScreen = new LoadingScreen(this);
+		menuScreen = new MenuScreen(this);
+		setScreen(loadingScreen);
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		super.render();
+	}
+	
+	@Override
+	public void resize(int width, int height) {
+		viewport.update(width, height);
+		camera.update();
+		super.resize(width, height);
+	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		assets.dispose();
 	}
 }
