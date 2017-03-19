@@ -15,6 +15,7 @@ public class Application extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		System.out.println("test");
+		System.out.println("another test!");
 	}
 
 	@Override
