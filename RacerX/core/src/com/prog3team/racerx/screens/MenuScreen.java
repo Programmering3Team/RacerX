@@ -32,7 +32,6 @@ public class MenuScreen extends GameScreen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 		
 	}
 
