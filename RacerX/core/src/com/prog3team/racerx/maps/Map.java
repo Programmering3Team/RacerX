@@ -37,8 +37,7 @@ public abstract class Map implements GameInterface {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		tiledMap.dispose();
 	}
 
 }

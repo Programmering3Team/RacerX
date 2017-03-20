@@ -33,7 +33,7 @@ public class Application extends Game {
 	}
 
 	private void initCameras() {
-		//Normal Camera
+		//Standard Camera
 		camera = new OrthographicCamera();
 		viewport = new StretchViewport(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, camera);
 		viewport.apply();
