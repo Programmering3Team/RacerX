@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.prog3team.racerx.screens.LoadingScreen;
+import com.prog3team.racerx.screens.LoginScreen;
 import com.prog3team.racerx.screens.MenuScreen;
 import com.prog3team.racerx.utils.Constants;
 
@@ -19,6 +20,7 @@ public class Application extends Game {
 	//Screens
 	public MenuScreen menuScreen;
 	public LoadingScreen loadingScreen;
+	public LoginScreen loginScreen;
 	
 	@Override
 	public void create () {
@@ -27,9 +29,10 @@ public class Application extends Game {
 		batch = new SpriteBatch();
 		assets = new AssetManager();
 		//Init Screens
+		loginScreen = new LoginScreen(this);
 		loadingScreen = new LoadingScreen(this);
 		menuScreen = new MenuScreen(this);
-		setScreen(loadingScreen);
+		setScreen(loginScreen);
 	}
 
 	private void initCameras() {
