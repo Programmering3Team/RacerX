@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.prog3team.racerx.Application;
 import com.prog3team.racerx.utils.Constants;
@@ -15,9 +17,10 @@ import com.prog3team.racerx.utils.Constants;
 public class LoginScreen extends GameScreen {
 	private Stage stage;
 	private BitmapFont font;
-	private TextField username, password;
+	private TextField textFieldUsername, textFieldPassword;
+	private TextButton loginButton;
 	
-	private Texture tfTexture;
+	private Texture tfTexture, buttonTexture;
 	
 	public LoginScreen(Application app) {
 		super(app);
@@ -28,10 +31,12 @@ public class LoginScreen extends GameScreen {
 		stage = new Stage(app.uiViewport, app.batch);
 		font = new BitmapFont();
 		tfTexture = new Texture(Gdx.files.internal("1.png"));
-//		initTextFields();
+		buttonTexture = new Texture(Gdx.files.internal("button.png"));
+		initTextFields();
+		initButtons();
 		Gdx.input.setInputProcessor(stage);
 	}
-	
+
 	private void initTextFields() {
 		TextField.TextFieldStyle tfs = new TextField.TextFieldStyle();
 		tfs.font = font;
@@ -40,15 +45,34 @@ public class LoginScreen extends GameScreen {
 		tfs.background = new TextureRegionDrawable(new TextureRegion(tfTexture));
 		tfs.cursor = new TextureRegionDrawable(new TextureRegion(tfTexture));
 		
-		username = new TextField("Enter Username", tfs);
-		password = new TextField("Enter Password", tfs);
-		password.setPasswordCharacter('*');
+		textFieldUsername = new TextField("", tfs);
+		textFieldPassword = new TextField("", tfs);
+		textFieldPassword.setPasswordMode(true);
+		textFieldPassword.setPasswordCharacter('*');
 		
-		username.setPosition(Constants.VIRTUAL_WIDTH/2, Constants.VIRTUAL_HEIGHT/2);
-		password.setPosition(Constants.VIRTUAL_WIDTH/2, Constants.VIRTUAL_HEIGHT/2 - 50);
+		textFieldUsername.setPosition(Constants.VIRTUAL_UI_WIDTH/2-tfTexture.getWidth()/2, Constants.VIRTUAL_UI_HEIGHT/2);
+		textFieldPassword.setPosition(Constants.VIRTUAL_UI_WIDTH/2-tfTexture.getWidth()/2, Constants.VIRTUAL_UI_HEIGHT/2 - 50);
 		
-		stage.addActor(username);
-		stage.addActor(password);
+		textFieldPassword.setTextFieldListener(new TextFieldListener() {
+			@Override
+			public void keyTyped(TextField textField, char c) {
+				// TODO Auto-generated method stub
+			}
+		});
+		
+		stage.addActor(textFieldUsername);
+		stage.addActor(textFieldPassword);
+	}
+	
+	private void initButtons() {
+		TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
+		tbs.font = font;
+		tbs.up = new TextureRegionDrawable(new TextureRegion(buttonTexture));
+		tbs.pressedOffsetY = -2;
+		
+		loginButton = new TextButton("Log In", tbs);
+		loginButton.setPosition(Constants.VIRTUAL_UI_WIDTH/2-buttonTexture.getWidth()/2, Constants.VIRTUAL_UI_HEIGHT/2 - 100);
+		stage.addActor(loginButton);
 		
 	}
 
@@ -97,6 +121,7 @@ public class LoginScreen extends GameScreen {
 	public void dispose() {
 		stage.dispose();
 		tfTexture.dispose();
+		buttonTexture.dispose();
 	}
 
 }

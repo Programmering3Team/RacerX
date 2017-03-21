@@ -44,9 +44,9 @@ public class Application extends Game {
 		camera.update();
 		//UI Camera
 		uiCamera = new OrthographicCamera();
-		uiViewport = new StretchViewport(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, uiCamera);
+		uiViewport = new StretchViewport(Constants.VIRTUAL_UI_WIDTH, Constants.VIRTUAL_UI_HEIGHT, uiCamera);
 		uiViewport.apply();
-		uiCamera.position.set(Constants.VIRTUAL_WIDTH/2, Constants.VIRTUAL_HEIGHT/2, 0);
+		uiCamera.position.set(Constants.VIRTUAL_UI_WIDTH/2, Constants.VIRTUAL_UI_HEIGHT/2, 0);
 		uiCamera.update();
 	}
 
