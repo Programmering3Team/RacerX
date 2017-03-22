@@ -5,7 +5,7 @@ public class Constants {
 	public final static String VERSION = "0.1";
 	public final static int VIRTUAL_WIDTH = 400;
 	public final static int VIRTUAL_HEIGHT = 400;
-	public final static int VIRTUAL_UI_WIDTH = 600;
-	public final static int VIRTUAL_UI_HEIGHT = 600;
+	public final static int VIRTUAL_UI_WIDTH = 400;
+	public final static int VIRTUAL_UI_HEIGHT = 400;
 	public final static int PPM = 32;
 }

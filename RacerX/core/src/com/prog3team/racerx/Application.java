@@ -9,9 +9,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.prog3team.racerx.screens.LoadingScreen;
 import com.prog3team.racerx.screens.LoginScreen;
 import com.prog3team.racerx.screens.MenuScreen;
+import com.prog3team.racerx.screens.PlayScreen;
+import com.prog3team.racerx.screens.LoadingScreen.LoadNext;
 import com.prog3team.racerx.utils.Constants;
 
 public class Application extends Game {
+	public final boolean DEBUG = true;
 	//General
 	public OrthographicCamera camera, uiCamera;
 	public Viewport viewport, uiViewport;
@@ -21,6 +24,7 @@ public class Application extends Game {
 	public MenuScreen menuScreen;
 	public LoadingScreen loadingScreen;
 	public LoginScreen loginScreen;
+	public PlayScreen playScreen;
 	
 	@Override
 	public void create () {
@@ -32,7 +36,10 @@ public class Application extends Game {
 		loginScreen = new LoginScreen(this);
 		loadingScreen = new LoadingScreen(this);
 		menuScreen = new MenuScreen(this);
-		setScreen(loginScreen);
+		playScreen = new PlayScreen(this);
+		
+		loadingScreen.load(LoadNext.LOGIN);
+		setScreen(loadingScreen);
 	}
 
 	private void initCameras() {
